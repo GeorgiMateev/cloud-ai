@@ -3,8 +3,8 @@
 notebook=$1
 scriptname="$(basename $notebook .ipynb)".py
 
-# Give process a 4 hours to complete
-shutdown +240
-jupyter nbconvert --to script --execute ${notebook} && python ${scriptname} > stdout.txt 2> stderr.txt
-rm ${scriptname}
-shutdown now
+# Give the process some minutes complete
+# sudo shutdown +120
+sudo -E env "PATH=$PATH" jupyter nbconvert --to script ${notebook} && ipython ${scriptname} > stdout.txt 2> stderr.txt
+sudo rm ${scriptname}
+sudo shutdown now
